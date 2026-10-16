@@ -1,0 +1,10 @@
+startCommand:
+  type: stdio
+  configSchema:
+    type: object
+    properties:
+      rapidapiKey:
+        type: string
+        description: Optional RapidAPI key
+  commandFunction: |-
+    (config) => ({ command: 'validalatam-mcp', args: [], env: config.rapidapiKey ? { RAPIDAPI_KEY: config.rapidapiKey } : {} })

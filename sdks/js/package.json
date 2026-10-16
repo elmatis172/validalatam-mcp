@@ -1,0 +1,4 @@
+{ "name": "validalatam", "version": "0.1.0", "description": "Client for the ValidaLatam LatAm document validation API (CUIT, CPF, CNPJ, RFC, CURP, RUT...)",
+  "type": "module", "main": "index.mjs", "exports": "./index.mjs", "license": "MIT", "private": true,
+  "keywords": ["cuit", "cpf", "cnpj", "rfc", "curp", "rut", "validation", "latam"],
+  "homepage": "https://validalatam.ia-latam.app" }
