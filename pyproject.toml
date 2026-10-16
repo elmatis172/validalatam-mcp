@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "validalatam-mcp"
-version = "0.1.0"
+version = "0.1.1"
 description = "MCP server for the ValidaLatam API: validate CUIT, CPF, CNPJ, RFC, CURP, RUT, NIT, RUC, CLABE, CBU, IBAN"
 readme = "README.md"
 license = "MIT"
