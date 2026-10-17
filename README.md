@@ -43,7 +43,7 @@ validalatam-mcp
 ### Configuration
 | Env var | Default | Purpose |
 |---|---|---|
-| `RAPIDAPI_KEY` | – | If set, calls go through RapidAPI (`validalatam.p.rapidapi.com`) |
+| `RAPIDAPI_KEY` | – | Recommended. If set, calls go through RapidAPI (`validalatam.p.rapidapi.com`) and use your plan's quota (free Basic plan available). Without it, the public endpoint allows a small free number of validations per day per IP (a batch counts each document). |
 | `VALIDALATAM_BASE_URL` | `https://validalatam.ia-latam.app` | Override API base URL |
 
 ### Docker
@@ -73,7 +73,7 @@ pip install git+https://github.com/elmatis172/validalatam-mcp
 ```
 
 ### Claude Desktop / Cursor
-Usá el mismo bloque JSON de arriba en `claude_desktop_config.json` o `~/.cursor/mcp.json`. `RAPIDAPI_KEY` es opcional.
+Usá el mismo bloque JSON de arriba en `claude_desktop_config.json` o `~/.cursor/mcp.json`. `RAPIDAPI_KEY` es opcional pero recomendado: sin clave, el endpoint público permite unas pocas validaciones gratis por día y por IP (un batch cuenta cada documento). Con clave se usa la cuota de tu plan en RapidAPI (hay un plan Basic gratis).
 
 ### Herramientas
 `validate_document`, `validate_batch`, `generate_test_data` (datos FALSOS de prueba), `list_document_types`.

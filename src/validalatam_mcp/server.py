@@ -3,6 +3,8 @@
 Env vars:
   VALIDALATAM_BASE_URL  default https://validalatam.ia-latam.app
   RAPIDAPI_KEY          optional; if set, requests go through RapidAPI (validalatam.p.rapidapi.com)
+                        and count against your RapidAPI plan. Without it, the public endpoint is used,
+                        limited to a small free number of validations per day per IP.
 """
 import os
 from typing import Any
@@ -15,22 +17,38 @@ except ImportError:  # mcp 1.x
 
 DEFAULT_BASE = "https://validalatam.ia-latam.app"
 RAPID_HOST = "validalatam.p.rapidapi.com"
+RAPIDAPI_URL = "https://rapidapi.com/MatiasPengue/api/validalatam"
+USER_AGENT = "validalatam-mcp/0.2.0"
 
 mcp = FastMCP("validalatam")
 
 
 def _client() -> httpx.Client:
-    key = os.environ.get("RAPIDAPI_KEY")
+    key = os.environ.get("RAPIDAPI_KEY", "").strip()
     if key:
         return httpx.Client(base_url=f"https://{RAPID_HOST}", timeout=15,
-                            headers={"X-RapidAPI-Key": key, "X-RapidAPI-Host": RAPID_HOST})
+                            headers={"X-RapidAPI-Key": key, "X-RapidAPI-Host": RAPID_HOST,
+                                     "User-Agent": USER_AGENT})
     return httpx.Client(base_url=os.environ.get("VALIDALATAM_BASE_URL", DEFAULT_BASE).rstrip("/"), timeout=15,
-                        headers={"User-Agent": "validalatam-mcp/0.1.0"})
+                        headers={"User-Agent": USER_AGENT})
 
 
 def _call(method: str, path: str, **kw) -> Any:
     with _client() as c:
         r = c.request(method, path, **kw)
+        if r.status_code == 429 and not os.environ.get("RAPIDAPI_KEY", "").strip():
+            try:
+                info = r.json()
+            except ValueError:
+                info = {}
+            return {
+                "error": "free_daily_limit_exceeded",
+                "message": info.get("message") or "Free daily limit of the public ValidaLatam endpoint reached.",
+                "how_to_fix": f"Get a RapidAPI key (free Basic plan available) at {RAPIDAPI_URL} "
+                              "and set it as the RAPIDAPI_KEY env var of this MCP server.",
+                "reset_at": info.get("reset_at"),
+                "upgrade_url": RAPIDAPI_URL,
+            }
         r.raise_for_status()
         return r.json()
 
