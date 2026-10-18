@@ -2,7 +2,7 @@
 
 <!-- mcp-name: io.github.elmatis172/validalatam-mcp -->
 
-[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/elmatis172/validalatam-mcp)
+[![Listed on mcpservers.org](https://mcpservers.org/badge.svg)](https://mcpservers.org/servers/elmatis172/validalatam-mcp) [![elmatis172/validalatam-mcp MCP server](https://glama.ai/mcp/servers/elmatis172/validalatam-mcp/badges/score.svg)](https://glama.ai/mcp/servers/elmatis172/validalatam-mcp)
 
 MCP server for the **[ValidaLatam API](https://validalatam.ia-latam.app)** — validate, normalize and format Latin American tax IDs, national IDs and bank accounts: AR CUIT/CUIL/DNI/CBU/CVU, BR CPF/CNPJ, MX RFC/CURP/CLABE, CL RUT, CO NIT, PE RUC, UY CI/RUT, EC Cédula/RUC, PY RUC, IBAN.
 
