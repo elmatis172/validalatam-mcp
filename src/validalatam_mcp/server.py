@@ -18,7 +18,7 @@ except ImportError:  # mcp 1.x
 DEFAULT_BASE = "https://validalatam.ia-latam.app"
 RAPID_HOST = "validalatam.p.rapidapi.com"
 RAPIDAPI_URL = "https://rapidapi.com/MatiasPengue/api/validalatam"
-USER_AGENT = "validalatam-mcp/0.2.0"
+USER_AGENT = "validalatam-mcp/0.2.1"
 
 mcp = FastMCP("validalatam")
 
