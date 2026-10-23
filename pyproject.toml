@@ -9,7 +9,7 @@ description = "MCP server for the ValidaLatam API: validate CUIT, CPF, CNPJ, RFC
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
-authors = [{ name = "Matias Pengue", email = "matias.pengue@gmail.com" }]
+authors = [{ name = "Matias Pengue", email = "faucolabs@gmail.com" }]
 keywords = ["mcp", "mcp-server", "latam", "validation", "cuit", "cpf", "rfc"]
 dependencies = ["mcp>=1.2", "httpx>=0.27"]
 
