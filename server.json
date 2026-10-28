@@ -3,12 +3,12 @@
   "name": "io.github.elmatis172/validalatam-mcp",
   "description": "Validate LatAm tax, ID and bank numbers: CUIT, CPF, CNPJ, RFC, CURP, RUT, NIT, RUC, CLABE",
   "repository": { "url": "https://github.com/elmatis172/validalatam-mcp", "source": "github" },
-  "version": "0.2.1",
+  "version": "0.2.2",
   "packages": [
     {
       "registryType": "pypi",
       "identifier": "validalatam-mcp",
-      "version": "0.2.1",
+      "version": "0.2.2",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "RAPIDAPI_KEY", "description": "Optional RapidAPI key; routes calls through RapidAPI", "isRequired": false, "isSecret": true },

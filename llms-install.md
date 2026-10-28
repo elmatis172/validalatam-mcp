@@ -39,7 +39,7 @@ Then configure:
 If the `validalatam-mcp` script is not on PATH, use `"command": "python", "args": ["-m", "validalatam_mcp.server"]` with the Python interpreter where it was installed.
 
 ## API key (optional)
-- `RAPIDAPI_KEY` is **optional**. Without it the server works immediately using the public endpoint, which allows a small free number of validations per day per IP.
+- `RAPIDAPI_KEY` is **optional**. Without it the server works immediately using the public endpoint, which is a demo limited to 10 requests per IP per day; batch and generate tools require a RapidAPI key.
 - For more volume, the user can get a key (free Basic plan available) at https://rapidapi.com/MatiasPengue/api/validalatam and put it in `RAPIDAPI_KEY`. Ask the user for the key; do not invent one. Leave it empty or remove the `env` block if they don't have one.
 - `VALIDALATAM_BASE_URL` (optional) overrides the API base URL; default `https://validalatam.ia-latam.app`.
 

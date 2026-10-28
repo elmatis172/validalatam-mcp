@@ -2,6 +2,12 @@ import httpx
 import respx
 
 from validalatam_mcp import server
+import pytest
+
+
+@pytest.fixture(autouse=True)
+def _no_notice(monkeypatch):
+    monkeypatch.setattr(server, "_notice_shown", True)
 
 BASE = server.DEFAULT_BASE
 
@@ -65,7 +71,7 @@ def test_direct_429_returns_upgrade_hint(monkeypatch):
         429, json={"error": "free_daily_limit_exceeded", "message": "limit", "reset_at": "2026-10-18T00:00:00Z"}))
     out = server.validate_document("BR_CPF", "52998224725")
     assert out["error"] == "free_daily_limit_exceeded"
-    assert out["upgrade_url"] == server.RAPIDAPI_URL and "RAPIDAPI_KEY" in out["how_to_fix"]
+    assert out["upgrade_url"] == server.PRICING_URL and "RAPIDAPI_KEY" in out["how_to_fix"]
     assert out["reset_at"] == "2026-10-18T00:00:00Z"
 
 
@@ -84,3 +90,31 @@ def test_blank_key_uses_direct(monkeypatch):
     r = respx.get(f"{BASE}/types").mock(return_value=httpx.Response(200, json={}))
     server.list_document_types()
     assert r.called and "X-RapidAPI-Key" not in r.calls.last.request.headers
+
+
+@respx.mock
+def test_first_call_shows_demo_notice_once(monkeypatch):
+    monkeypatch.delenv("RAPIDAPI_KEY", raising=False)
+    monkeypatch.setattr(server, "_notice_shown", False)
+    respx.post(f"{server.DEFAULT_BASE}/validate").mock(return_value=httpx.Response(200, json={"valid": True}))
+    r1 = server.validate_document("BR_CPF", "52998224725")
+    assert "10 requests" in r1["notice"] and r1["valid"] is True
+    assert "notice" not in server.validate_document("BR_CPF", "52998224725")
+
+
+@respx.mock
+def test_no_notice_with_key(monkeypatch):
+    monkeypatch.setenv("RAPIDAPI_KEY", "k")
+    monkeypatch.setattr(server, "_notice_shown", False)
+    respx.post(f"https://{server.RAPID_HOST}/validate").mock(return_value=httpx.Response(200, json={"valid": True}))
+    assert "notice" not in server.validate_document("BR_CPF", "52998224725")
+
+
+@respx.mock
+def test_direct_402_returns_rapidapi_hint(monkeypatch):
+    monkeypatch.delenv("RAPIDAPI_KEY", raising=False)
+    respx.post(f"{server.DEFAULT_BASE}/batch").mock(return_value=httpx.Response(
+        402, json={"error": "rapidapi_required", "message": "/batch is only available through RapidAPI."}))
+    r = server.validate_batch([{"type": "BR_CPF", "value": "1"}])
+    assert r["error"] == "rapidapi_required" and r["upgrade_url"].endswith("/pricing")
+    assert "RAPIDAPI_KEY" in r["how_to_fix"]

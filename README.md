@@ -45,7 +45,7 @@ Published on [PyPI](https://pypi.org/project/validalatam-mcp/). Step-by-step gui
 ### Configuration
 | Env var | Default | Purpose |
 |---|---|---|
-| `RAPIDAPI_KEY` | – | Recommended. If set, calls go through RapidAPI (`validalatam.p.rapidapi.com`) and use your plan's quota (free Basic plan available). Without it, the public endpoint allows a small free number of validations per day per IP (a batch counts each document). |
+| `RAPIDAPI_KEY` | – | Recommended. If set, calls go through RapidAPI (`validalatam.p.rapidapi.com`) and use your plan's quota (free Basic plan available). Without it, the public endpoint is a **demo limited to 10 requests per IP per day**, and `validate_batch` / `generate_test_data` are not available (they require RapidAPI: Basic free, Pro 9 USD/mo, Ultra 29, Mega 99 — https://rapidapi.com/MatiasPengue/api/validalatam/pricing). The first tool result shows a short notice about this. |
 | `VALIDALATAM_BASE_URL` | `https://validalatam.ia-latam.app` | Override API base URL |
 
 ### Docker
@@ -75,7 +75,7 @@ pip install validalatam-mcp
 ```
 
 ### Claude Desktop / Cursor
-Usá el mismo bloque JSON de arriba en `claude_desktop_config.json` o `~/.cursor/mcp.json`. `RAPIDAPI_KEY` es opcional pero recomendado: sin clave, el endpoint público permite unas pocas validaciones gratis por día y por IP (un batch cuenta cada documento). Con clave se usa la cuota de tu plan en RapidAPI (hay un plan Basic gratis).
+Usá el mismo bloque JSON de arriba en `claude_desktop_config.json` o `~/.cursor/mcp.json`. `RAPIDAPI_KEY` es opcional pero recomendado: sin clave, el endpoint público es una demo limitada a 10 requests por día y por IP, y `validate_batch` / `generate_test_data` requieren RapidAPI (Pro 9 USD/mes, https://rapidapi.com/MatiasPengue/api/validalatam/pricing). Con clave se usa la cuota de tu plan en RapidAPI (hay un plan Basic gratis).
 
 ### Herramientas
 `validate_document`, `validate_batch`, `generate_test_data` (datos FALSOS de prueba), `list_document_types`.
