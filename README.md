@@ -16,12 +16,12 @@ This is a thin client: every tool call is an HTTP request to the hosted API. No 
 
 ### Install
 ```bash
-uvx --from git+https://github.com/elmatis172/validalatam-mcp validalatam-mcp
+uvx validalatam-mcp
 # or
-pip install git+https://github.com/elmatis172/validalatam-mcp
+pip install validalatam-mcp
 validalatam-mcp
 ```
-(Once published to PyPI: `uvx validalatam-mcp` / `pip install validalatam-mcp`.)
+Published on [PyPI](https://pypi.org/project/validalatam-mcp/). Step-by-step guide for AI agents (Cline, etc.): [llms-install.md](llms-install.md).
 
 ### Claude Desktop (`claude_desktop_config.json`) / Cursor (`~/.cursor/mcp.json`)
 ```json
@@ -29,7 +29,7 @@ validalatam-mcp
   "mcpServers": {
     "validalatam": {
       "command": "uvx",
-      "args": ["--from", "git+https://github.com/elmatis172/validalatam-mcp", "validalatam-mcp"],
+      "args": ["validalatam-mcp"],
       "env": { "RAPIDAPI_KEY": "optional-your-key" }
     }
   }
@@ -69,9 +69,9 @@ Servidor MCP para la **[API ValidaLatam](https://validalatam.ia-latam.app)**: va
 
 ### Instalación
 ```bash
-uvx --from git+https://github.com/elmatis172/validalatam-mcp validalatam-mcp
+uvx validalatam-mcp
 # o
-pip install git+https://github.com/elmatis172/validalatam-mcp
+pip install validalatam-mcp
 ```
 
 ### Claude Desktop / Cursor
